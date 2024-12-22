@@ -2,94 +2,112 @@
   <div class="app-container home">
     <el-row :gutter="20">
       <el-col :sm="24" :lg="24">
-        <blockquote class="text-warning" style="font-size: 14px">
-          11.01潍坊北DR单板扩容，烟台DR License升级计划：
-          <br />
-          <el-link
-            href="https://www.baidu.com"
-            type="primary"
-            target="_blank"
-            >https://www.baidu.com</el-link
-          >
-          <br />
-          请点击进入考试系统，进行答题：
-          <br />
-          <el-link
-            href="https://cloud.tencent.com/redirect.php?redirect=1025&cps_key=198c8df2ed259157187173bc7f4f32fd&from=console"
-            type="primary"
-            target="_blank"
-            >https://cloud.tencent.com/redirect.php?redirect=1025&cps_key=198c8df2ed259157187173bc7f4f32fd&from=console</el-link
-          >
-          <br />
-          <h4 class="text-danger">
-            秋检秋鉴计划进度
-          </h4>
-        </blockquote>
-
-        <hr />
+        <el-carousel :interval="4000" type="card" height="200px">
+          <el-carousel-item v-for="item in 3" :key="item">
+            <img :src="imgList[item]" width="100%" height="100%">
+          </el-carousel-item>
+        </el-carousel>
       </el-col>
     </el-row>
     <el-row :gutter="20">
-      <el-col :sm="24" :lg="12" style="padding-left: 20px">
-        <h2>RY后台管理框架</h2>
-        <p>
-          一直想做一款后台管理系统，看了很多优秀的开源项目但是发现没有合适自己的。于是利用空闲休息时间开始自己写一套后台系统。如此有了若依管理系统，她可以用于所有的Web应用程序，如网站管理后台，网站会员中心，CMS，CRM，OA等等，当然，您也可以对她进行深度定制，以做出更强系统。所有前端后台代码封装过后十分精简易上手，出错概率低。同时支持移动客户端访问。系统会陆续更新一些实用功能。
-        </p>
-        <p>
-          <b>当前版本:</b> <span>v{{ version }}</span>
-        </p>
-        <p>
-          <el-tag type="danger">入口</el-tag>
-        </p>
-        <p>
-          <el-button
-            type="primary"
-            icon="Cloudy"
-            plain
-            @click="goTarget('https://gitee.com/y_project/RuoYi-Vue')"
-            >访问跳转1</el-button
-          >
-          <el-button
-            icon="HomeFilled"
-            plain
-            @click="goTarget('http://ruoyi.vip')"
-            >访问跳转2</el-button
-          >
-        </p>
+      <el-col :span="8" style="display: flex; justify-content: center; align-items: center;">
+        <div class="statistic-card">
+          <el-statistic :value="218">
+            <template #title>
+              <div style="display: inline-flex; align-items: center">
+                机房电路数量
+                <el-tooltip
+                  effect="dark"
+                  content="Number of users who logged into the product in one day"
+                  placement="top"
+                >
+                  <el-icon style="margin-left: 4px" :size="12">
+                    <Warning />
+                  </el-icon>
+                </el-tooltip>
+              </div>
+            </template>
+          </el-statistic>
+          <div class="statistic-footer">
+            <div class="footer-item">
+              <span>去年同比</span>
+              <span class="red">
+                2.4%
+                <el-icon>
+                  <CaretTop />
+                </el-icon>
+              </span>
+            </div>
+          </div>
+        </div>
       </el-col>
-
-      <el-col :sm="24" :lg="12" style="padding-left: 50px">
-        <el-row>
-          <el-col :span="12">
-            <h2>技术选型</h2>
-          </el-col>
-        </el-row>
-        <el-row>
-          <el-col :span="6">
-            <h4>后端技术</h4>
-            <ul>
-              <li>SpringBoot</li>
-              <li>Spring Security</li>
-              <li>JWT</li>
-              <li>MyBatis</li>
-              <li>Druid</li>
-              <li>Fastjson</li>
-              <li>...</li>
-            </ul>
-          </el-col>
-          <el-col :span="6">
-            <h4>前端技术</h4>
-            <ul>
-              <li>Vue</li>
-              <li>Vuex</li>
-              <li>Element-ui</li>
-              <li>Axios</li>
-              <li>Sass</li>
-              <li>Quill</li>
-              <li>...</li>
-            </ul>
-          </el-col>
-        </el-row>
+      <el-col :span="8" style="display: flex; justify-content: center; align-items: center;">
+        <div class="statistic-card" >
+          <el-statistic :value="98">
+            <template #title>
+              <div style="display: inline-flex; align-items: center">
+                本月故障数量
+                <el-tooltip
+                  effect="dark"
+                  content="Number of users who logged into the product in one month"
+                  placement="top"
+                >
+                  <el-icon style="margin-left: 4px" :size="12">
+                    <Warning />
+                  </el-icon>
+                </el-tooltip>
+              </div>
+            </template>
+          </el-statistic>
+          <div class="statistic-footer">
+            <div class="footer-item">
+              <span>去年同比</span>
+              <span class="green">
+                12%
+                <el-icon>
+                  <CaretBottom />
+                </el-icon>
+              </span>
+            </div>
+          </div>
+        </div>
+      </el-col>
+      <el-col :span="8" style="display: flex; justify-content: center; align-items: center;">
+        <div class="statistic-card">
+          <el-statistic :value="2200" title="New transactions today">
+            <template #title>
+              <div style="display: inline-flex; align-items: center">
+                本月耗电量
+              </div>
+            </template>
+          </el-statistic>
+          <div class="statistic-footer">
+            <div class="footer-item">
+              <span>去年同比</span>
+              <span class="red">
+                11%
+                <el-icon>
+                  <CaretTop />
+                </el-icon>
+              </span>
+            </div>
+          </div>
+        </div>
+      </el-col>
+    </el-row>
+    <el-row :gutter="20">
+      <el-col :sm="24" :lg="24" style="padding-left: 20px">
+        <h2>遗留设备告警</h2>
+        <el-table :data="alarmData" class="data_table">
+          <el-table-column prop="system" label="系统" width="180">
+          </el-table-column>
+          <el-table-column prop="name" label="设备名称" width="180">
+          </el-table-column>
+          <el-table-column prop="info" label="告警描述" width="360">
+          </el-table-column>
+          <el-table-column prop="time" label="告警时间">
+          </el-table-column>
+        </el-table>
       </el-col>
     </el-row>
     <el-divider />
@@ -98,43 +116,54 @@
         <el-card class="update-log">
           <template v-slot:header>
             <div class="clearfix">
-              <span>重要通知</span>
+              <span>工单记录</span>
             </div>
           </template>
-          <div class="body">
-            <p>
-              <i class="el-icon-s-promotion"></i> 官网：<el-link
-                href="http://www.ruoyi.vip"
-                target="_blank"
-                >http://www.ruoyi.vip</el-link
-              >
-            </p>
-            <p>
-              <i class="el-icon-user-solid"></i> 测试：<s> 满937441 </s> <s> 测试数据 </s>
-              <s> 测试数据 </s> <s> 测试数据 </s> <s> 测试数据 </s> <s> 测试数据 </s>
-              <s> 测试数据 </s> <s> 测试数据 </s> <s> 测试数据 </s> <s> 测试数据 </s> 
-            </p>
-            <p>
-              <i class="el-icon-chat-dot-round"></i> 测试：<a
-                href="javascript:;"
-                >/ *测试</a
-              >
-            </p>
-            <p>
-              <i class="el-icon-money"></i> 测试：<a
-                href="javascript:;"
-                class="支付宝信息"
-                >/ *测试</a
-              >
-            </p>
-          </div>
+          <el-timeline style="max-width: 600px">
+            <el-timeline-item timestamp="2024/12/12" placement="top" color="#0bbd87">
+              <el-card>
+                <el-collapse>
+                  <el-collapse-item title="JNTXD-SJW202465">
+                    <div>
+                      关于开通庄寨CE01/SCADA-G0/0/14 电力通道的工单
+                    </div>
+                  </el-collapse-item>
+                </el-collapse>
+                <p>完成时间 2024/12/12 20:46</p>
+              </el-card>
+            </el-timeline-item>
+            <el-timeline-item timestamp="2024/10/22" placement="top" color="#0bbd87">
+              <el-card>
+                <el-collapse>
+                  <el-collapse-item title="JNTXD-SJW202458">
+                    <div>
+                      关于开通庄寨CE01/SCADA-G0/0/14 电力通道的工单
+                    </div>
+                  </el-collapse-item>
+                </el-collapse>
+                <p>完成时间 2024/10/22 14:35</p>
+              </el-card>
+            </el-timeline-item>
+            <el-timeline-item timestamp="2024/09/01" placement="top" color="#0bbd87">
+              <el-card>
+                <el-collapse>
+                  <el-collapse-item title="JNTXD-SJW202433s">
+                    <div>
+                      关于开通庄寨CE01/SCADA-G0/0/14 电力通道的工单
+                    </div>
+                  </el-collapse-item>
+                </el-collapse>
+                <p>完成时间 2024/09/01 10:11</p>
+              </el-card>
+            </el-timeline-item>
+          </el-timeline>
         </el-card>
       </el-col>
       <el-col :xs="24" :sm="24" :md="12" :lg="8">
         <el-card class="update-log">
           <template v-slot:header>
             <div class="clearfix">
-              <span>段内公告</span>
+              <span>段发文件</span>
             </div>
           </template>
           <el-collapse accordion>
@@ -363,8 +392,34 @@
 </template>
 
 <script setup name="Index">
+const imgList=["","src/assets/images/1.jpg","src/assets/images/2.jpg","src/assets/images/3.jpg"]
 const version = ref('3.8.7')
-
+const alarmData = [{
+          system: '数据网',
+          name: '菏泽南AR01',
+          info: 'G0/0/1#VCS93#收光低#-22.02dBm',
+          time: '2024-12-010'
+        }, {
+          system: '数据网',
+          name: '庄寨-CE01/SCADA',
+          info: 'G0/0/24#SCADA109#收光低#-21.52dBm',
+          time: '2024-12-010'
+        }, {
+          system: '数据网',
+          name: '庄寨-CE01/SCADA',
+          info: 'G0/0/14#SCADA109#断开#Down',
+          time: '2024-12-010'
+        }, {
+          system: '数据网',
+          name: '曹县AR01',
+          info: 'G0/1/5#DCQK50#收光低#-21.52dBm',
+          time: '2024-12-010'
+        }, {
+          system: '数据网',
+          name: '巨野AR02',
+          info: 'G0/2/4#TMIS300#收光低#-21.52dBm',
+          time: '2024-12-010'
+        }]
 function goTarget(url) {
   window.open(url, '__blank')
 }
@@ -431,6 +486,66 @@ function goTarget(url) {
       padding-inline-start: 40px;
     }
   }
+}
+.el-carousel__item h3 {
+  color: #475669;
+  opacity: 0.75;
+  line-height: 200px;
+  margin: 0;
+  text-align: center;
+}
+
+.el-carousel__item:nth-child(2n) {
+  background-color: #99a9bf;
+}
+
+.el-carousel__item:nth-child(2n + 1) {
+  background-color: #d3dce6;
+}
+
+:global(h2#card-usage ~ .example .example-showcase) {
+  background-color: var(--el-fill-color) !important;
+}
+
+.el-statistic {
+  --el-statistic-content-font-size: 28px;
+}
+
+.statistic-card {
+  height: 100%;
+  padding: 20px;
+  border-radius: 4px;
+  background-color: var(--el-bg-color-overlay);
+}
+
+.statistic-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  font-size: 12px;
+  color: var(--el-text-color-regular);
+  margin-top: 16px;
+}
+.st
+
+.statistic-footer .footer-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.statistic-footer .footer-item span:last-child {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 4px;
+}
+
+.green {
+  color: var(--el-color-success);
+}
+.red {
+  color: var(--el-color-error);
 }
 </style>
 

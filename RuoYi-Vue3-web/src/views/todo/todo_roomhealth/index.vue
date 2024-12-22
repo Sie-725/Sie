@@ -111,7 +111,7 @@
         <el-form-item label="线路" prop="line">
           <el-input v-model="form.line" placeholder="请输入线路" />
         </el-form-item>
-        <el-form-item label="" prop="jk">
+        <el-form-item label="JK" prop="jk">
           <el-input v-model="form.jk" placeholder="请输入" />
         </el-form-item>
         <el-form-item label="地区" prop="area">
@@ -120,29 +120,29 @@
         <el-form-item label="等级" prop="lever">
           <el-input v-model="form.lever" placeholder="请输入等级" />
         </el-form-item>
-        <el-form-item label="" prop="temperature">
+        <el-form-item label="温湿度" prop="temperature">
           <el-input v-model="form.temperature" placeholder="请输入" />
         </el-form-item>
-        <el-form-item label="" prop="hardware">
+        <el-form-item label="硬件" prop="hardware">
           <el-input v-model="form.hardware" placeholder="请输入" />
         </el-form-item>
-        <el-form-item label="" prop="ledger">
+        <el-form-item label="台账" prop="ledger">
           <el-input v-model="form.ledger" placeholder="请输入" />
         </el-form-item>
-        <el-form-item label="" prop="alarm">
+        <el-form-item label="告警" prop="alarm">
           <el-input v-model="form.alarm" placeholder="请输入" />
         </el-form-item>
-        <el-form-item label="" prop="malfunction">
+        <el-form-item label="故障" prop="malfunction">
           <el-input v-model="form.malfunction" placeholder="请输入" />
         </el-form-item>
-        <el-form-item label="" prop="indicators">
-          <el-input v-model="form.indicators" placeholder="请输入" />
+        <el-form-item label="指标" prop="indicators">
+          <el-input v-model="form.indicators" placeholder="请输入指标值" />
         </el-form-item>
-        <el-form-item label="" prop="life">
-          <el-input v-model="form.life" placeholder="请输入" />
+        <el-form-item label="时长" prop="life">
+          <el-input v-model="form.life" placeholder="请输入设备时长平分" />
         </el-form-item>
-        <el-form-item label="" prop="weight">
-          <el-input v-model="form.weight" placeholder="请输入" />
+        <el-form-item label="权重" prop="weight">
+          <el-input v-model="form.weight" placeholder="请输入机房权重" />
         </el-form-item>
         <el-form-item label="健康分" prop="total">
           <el-input v-model="form.total" placeholder="请输入健康分" />
