@@ -86,10 +86,13 @@
                 <el-table-column label="地区" align="center" prop="area" />
                 <el-table-column label="设备过保预警" align="center" class-name="small-padding fixed-width" >
                     <template  #default="scope">
-                        <el-popover placement="right" title="Title" :width="200" trigger="click" :content="'设备年限评分为：'+form.life">
+                        <el-popover placement="right" title="" :width="200" trigger="click" :content="'设备年限评分为：'+form.life">
                                 <template #reference>
                                     <div class="demo-progress">
-                                        <el-progress :percentage="91" status="warning" @click="handleTimedate(scope.row)"/>
+                                        <el-progress 
+                                        :percentage="parseInt((10.1-scope.row.life)/10.1*100)" 
+                                        :color="customColors"
+                                         @click="handleTimedate(scope.row)"/>
                                     </div>
                                 </template>
                             </el-popover>
@@ -189,6 +192,14 @@
  <script setup  name="Todo_roomhealth">
     import { listTodo_roomhealth, getTodo_roomhealth, delTodo_roomhealth, addTodo_roomhealth, updateTodo_roomhealth } from "@/api/todo/todo_roomhealth";
 
+    const customColors = [
+    //{ color: '#f56c6c', percentage: 20 },
+    //{ color: '#e6a23c', percentage: 40 },
+    { color: '#5cb87a', percentage: 70 },
+    { color: '#e6a23c', percentage: 90 },
+    { color: '#B50700', percentage: 100 },
+    ];
+
     const { proxy } = getCurrentInstance();
 
     const todo_roomhealthList = ref([]);
@@ -201,7 +212,9 @@
     const multiple = ref(true);
     const total = ref(0);
     const title = ref("");
+
     let mytime=0;
+
     const data = reactive({
     form: {},
     queryParams: {
@@ -254,6 +267,9 @@
         total: null,
         kwh: null
     };
+
+    //this.Chart2option.series[0].data=this.lin2data
+
     proxy.resetForm("todo_roomhealthRef");
     }
 
@@ -349,30 +365,23 @@
 </script>
 <script>
     import * as echarts from 'echarts'
-    //import Todo_room from '../todo_room/index.vue'
+    import health_data from '@/api/todo/todo_health_data.json';
+    /* import Todo_roomhealth from '../todo_roomhealth/todo_rohea_ex.vue' */
     export default {
-/*         components: {
-            Todo_room
-        }, */
+/*          components: {
+            Todo_roomhealth
+        },  */
         data(){
             return{
-                lin2data:null,
-                line2option: null,
+                //lin2data:null,
+                //Chart2option: null,
             }
             
         },
         computed:{
         },
-        methods:{
-            chartUpdate(row) {
-                this.lin2data=[row.line],
-                console.log(row)
-                console.log(this.lin2data)
-                //this.line2option.series[0].data=this.lin2data
-                //this.lineChart2.setOption(this.line2option,true)
-            },
-        },
         mounted() {
+            console.log(this.todo_roomhealthList)
             this.lineChart = echarts.init(this.$refs.lineChart)
             this.lineChart.setOption({
                 title: {
@@ -477,61 +486,83 @@
             })
 
             this.lineChart2 = echarts.init(this.$refs.lineChart2)
-            this.lineChart2.setOption({
+            this.Chart2option={
                 title: {
-                    text: '机房线路分布'
+                    text: '机房健康度分析'
                 },
-                // 提示框
                 tooltip: {
-                    trigger: 'axis'
+                    trigger: 'axis',
+                    axisPointer: {
+                        // Use axis to trigger tooltip
+                        type: 'shadow' // 'shadow' as default; can also be 'line' or 'shadow'
+                    }
                 },
+                legend: {},
                 grid: {
                     left: '3%',
-                    right: '3%',
+                    right: '4%',
                     bottom: '3%',
                     containLabel: true
                 },
-                // 工具栏
-                toolbox: {
-                    feature: {
-                        saveAsImage: {
-                            type: 'png'
-                        },
-                        magicType: {
-                            type: ['line', 'bar', 'stack']
-                        }
-                    }
-                },
                 xAxis: {
-                    type: 'category',
-                    axisLabel: {
-                        rotate: 60,
-                    },
-                    boundaryGap: false,
-                    data: ['','胶济线','京九线','辛泰线','济青高','潍莱高铁','潍烟高铁',
-                    '莱荣高铁','青盐铁路','日兰高铁','京沪高','石济客专','济莱高铁',
-                    '济郑高铁','瓦日线','京沪线','德大线','大莱荣线','海青铁路','新兖石',
-                    '枣临线','张东线','小沾线','磁东线','东平东莱','胶新线','邯济铁路','']
+                    type: 'value'
                 },
                 yAxis: {
-                    type: 'value',
-                    
+                    type: 'category',
+                    data: ['2021.10', '2022.03', '2022.10', '2023.03', '2023.10', '2024.03', '2024.10']
                 },
-                
                 series: [
                     {
-                        name: '不佳',
-                        type: 'bar',
-                        stack: '总量',
-                        barCategoryGap:'0%',
-                        barGap:'0%',
-                        barWidth:'60%',
-                        
-                        // smooth: true,
-                        data: [0,18,10,10,10,3,8,18,5,14,8,3,5,4,11,23,13,8,4,15,8,5,7,5,5,15,5,0]
+                    name: '温湿度',
+                    type: 'bar',
+                    stack: 'total',
+                    label: {
+                        show: true
+                    },
+                    emphasis: {
+                        focus: 'series'
+                    },
+                    data: [4, 4, 3, 5, 4, 4, 5]
+                    },
+                    {
+                    name: '硬件',
+                    type: 'bar',
+                    stack: 'total',
+                    label: {
+                        show: true
+                    },
+                    emphasis: {
+                        focus: 'series'
+                    },
+                    data: [7, 8, 8, 8, 9, 9, 10]
+                    },
+                    {
+                    name: '台账',
+                    type: 'bar',
+                    stack: 'total',
+                    label: {
+                        show: true
+                    },
+                    emphasis: {
+                        focus: 'series'
+                    },
+                    data: [8, 7, 8, 8, 8, 8, 10]
+                    },
+                    {
+                    name: '设备',
+                    type: 'bar',
+                    stack: 'total',
+                    label: {
+                        show: true
+                    },
+                    emphasis: {
+                        focus: 'series'
+                    },
+                    data: [49.5, 51.3, 52.2, 53.1, 53.1, 54, 54.9]
                     }
                 ]
-            })
+            },
+            this.lineChart2.setOption(this.Chart2option)
         }
     }
 </script>
