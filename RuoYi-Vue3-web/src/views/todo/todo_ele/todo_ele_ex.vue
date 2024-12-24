@@ -425,7 +425,7 @@ export default {
         // 'Germany', 'Iceland', 'India', 'Japan', 'North Korea', 'South Korea', 'New Zealand',
         // 'Norway', 'Poland', 'Russia', 'Turkey', 'United Kingdom', 'United States'];
         const countries = [
-            "艾默生Ⅰ-1",
+/*             "艾默生Ⅰ-1",
             "艾默生Ⅰ-2",
             "艾默生Ⅰ-3",
             "艾默生Ⅰ-4",
@@ -440,7 +440,11 @@ export default {
             "动力源Ⅱ-1",
             "动力源Ⅱ-2",
             "动力源Ⅱ-3",
-            "动力源Ⅱ-4",
+            "动力源Ⅱ-4", */
+            "艾默生Ⅰ",
+            "艾默生Ⅱ",
+            "动力源Ⅰ",
+            "动力源Ⅱ",
         ];
         const datasetWithFilters = [];
         const seriesList = [];

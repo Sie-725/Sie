@@ -360,7 +360,7 @@
                 },
                 series: [
                     {
-                        name: '不佳',
+                        //name: '不佳',
                         type: 'bar',
                         stack: '总量',
                         // smooth: true,
@@ -413,7 +413,7 @@
                 
                 series: [
                     {
-                        name: '不佳',
+                        //name: '不佳',
                         type: 'bar',
                         stack: '总量',
                         barCategoryGap:'0%',
