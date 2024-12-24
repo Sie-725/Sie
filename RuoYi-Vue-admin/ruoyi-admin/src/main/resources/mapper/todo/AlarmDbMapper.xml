@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.todo.mapper.AlarmDbMapper">
+    
+    <resultMap type="AlarmDb" id="AlarmDbResult">
+        <result property="id"    column="id"    />
+        <result property="system"    column="system"    />
+        <result property="line"    column="line"    />
+        <result property="name"    column="name"    />
+        <result property="port"    column="port"    />
+        <result property="lever"    column="lever"    />
+        <result property="des"    column="des"    />
+        <result property="date"    column="date"    />
+        <result property="status"    column="status"    />
+    </resultMap>
+
+    <sql id="selectAlarmDbVo">
+        select id, system, line, name, port, lever, des, date, status from todo_alarm_db
+    </sql>
+
+    <select id="selectAlarmDbList" parameterType="AlarmDb" resultMap="AlarmDbResult">
+        <include refid="selectAlarmDbVo"/>
+        <where>  
+            <if test="system != null  and system != ''"> and system like concat('%', #{system}, '%')</if>
+            <if test="line != null  and line != ''"> and line like concat('%', #{line}, '%')</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="port != null  and port != ''"> and port like concat('%', #{port}, '%')</if>
+            <if test="lever != null  and lever != ''"> and lever = #{lever}</if>
+            <if test="des != null  and des != ''"> and des like concat('%', #{des}, '%')</if>
+            <if test="date != null  and date != ''"> and date like concat('%', #{date}, '%')</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+        </where>
+    </select>
+    
+    <select id="selectAlarmDbById" parameterType="Long" resultMap="AlarmDbResult">
+        <include refid="selectAlarmDbVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertAlarmDb" parameterType="AlarmDb">
+        insert into todo_alarm_db
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="system != null and system != ''">system,</if>
+            <if test="line != null and line != ''">line,</if>
+            <if test="name != null and name != ''">name,</if>
+            <if test="port != null">port,</if>
+            <if test="lever != null and lever != ''">lever,</if>
+            <if test="des != null">des,</if>
+            <if test="date != null">date,</if>
+            <if test="status != null and status != ''">status,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="system != null and system != ''">#{system},</if>
+            <if test="line != null and line != ''">#{line},</if>
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="port != null">#{port},</if>
+            <if test="lever != null and lever != ''">#{lever},</if>
+            <if test="des != null">#{des},</if>
+            <if test="date != null">#{date},</if>
+            <if test="status != null and status != ''">#{status},</if>
+         </trim>
+    </insert>
+
+    <update id="updateAlarmDb" parameterType="AlarmDb">
+        update todo_alarm_db
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="system != null and system != ''">system = #{system},</if>
+            <if test="line != null and line != ''">line = #{line},</if>
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="port != null">port = #{port},</if>
+            <if test="lever != null and lever != ''">lever = #{lever},</if>
+            <if test="des != null">des = #{des},</if>
+            <if test="date != null">date = #{date},</if>
+            <if test="status != null and status != ''">status = #{status},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteAlarmDbById" parameterType="Long">
+        delete from todo_alarm_db where id = #{id}
+    </delete>
+
+    <delete id="deleteAlarmDbByIds" parameterType="String">
+        delete from todo_alarm_db where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

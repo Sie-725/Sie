@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.todo.mapper.HealthDbMapper">
+    
+    <resultMap type="HealthDb" id="HealthDbResult">
+        <result property="date"    column="date"    />
+        <result property="temperature"    column="temperature"    />
+        <result property="hardware"    column="hardware"    />
+        <result property="ledger"    column="ledger"    />
+        <result property="alarm"    column="alarm"    />
+        <result property="malfunction"    column="malfunction"    />
+        <result property="indicators"    column="indicators"    />
+        <result property="life"    column="life"    />
+        <result property="weight"    column="weight"    />
+        <result property="total"    column="total"    />
+    </resultMap>
+
+    <sql id="selectHealthDbVo">
+        select date, temperature, hardware, ledger, alarm, malfunction, indicators, life, weight, total from health_db
+    </sql>
+
+    <select id="selectHealthDbList" parameterType="HealthDb" resultMap="HealthDbResult">
+        <include refid="selectHealthDbVo"/>
+        <where>  
+            <if test="date != null  and date != ''"> and date like concat('%', #{date}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectHealthDbByDate" parameterType="String" resultMap="HealthDbResult">
+        <include refid="selectHealthDbVo"/>
+        where date = #{date}
+    </select>
+
+    <insert id="insertHealthDb" parameterType="HealthDb">
+        insert into health_db
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="date != null">date,</if>
+            <if test="temperature != null">temperature,</if>
+            <if test="hardware != null">hardware,</if>
+            <if test="ledger != null">ledger,</if>
+            <if test="alarm != null">alarm,</if>
+            <if test="malfunction != null">malfunction,</if>
+            <if test="indicators != null">indicators,</if>
+            <if test="life != null">life,</if>
+            <if test="weight != null">weight,</if>
+            <if test="total != null">total,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="date != null">#{date},</if>
+            <if test="temperature != null">#{temperature},</if>
+            <if test="hardware != null">#{hardware},</if>
+            <if test="ledger != null">#{ledger},</if>
+            <if test="alarm != null">#{alarm},</if>
+            <if test="malfunction != null">#{malfunction},</if>
+            <if test="indicators != null">#{indicators},</if>
+            <if test="life != null">#{life},</if>
+            <if test="weight != null">#{weight},</if>
+            <if test="total != null">#{total},</if>
+         </trim>
+    </insert>
+
+    <update id="updateHealthDb" parameterType="HealthDb">
+        update health_db
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="temperature != null">temperature = #{temperature},</if>
+            <if test="hardware != null">hardware = #{hardware},</if>
+            <if test="ledger != null">ledger = #{ledger},</if>
+            <if test="alarm != null">alarm = #{alarm},</if>
+            <if test="malfunction != null">malfunction = #{malfunction},</if>
+            <if test="indicators != null">indicators = #{indicators},</if>
+            <if test="life != null">life = #{life},</if>
+            <if test="weight != null">weight = #{weight},</if>
+            <if test="total != null">total = #{total},</if>
+        </trim>
+        where date = #{date}
+    </update>
+
+    <delete id="deleteHealthDbByDate" parameterType="String">
+        delete from health_db where date = #{date}
+    </delete>
+
+    <delete id="deleteHealthDbByDates" parameterType="String">
+        delete from health_db where date in 
+        <foreach item="date" collection="array" open="(" separator="," close=")">
+            #{date}
+        </foreach>
+    </delete>
+</mapper>
