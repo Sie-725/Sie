@@ -5,6 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.ruoyi.todo.mapper.RoomDbMapper">
     
     <resultMap type="RoomDb" id="RoomDbResult">
+        <result property="id"    column="id"    />
         <result property="name"    column="name"    />
         <result property="gisLo"    column="gis_lo"    />
         <result property="gisLa"    column="gis_la"    />
@@ -24,31 +25,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectRoomDbVo">
-        select name, gis_lo, gis_la, line, jk, area, lever, temperature, hardware, ledger, alarm, malfunction, indicators, life, weight, total from room_db
+        select id, name, gis_lo, gis_la, line, jk, area, lever, temperature, hardware, ledger, alarm, malfunction, indicators, life, weight, total from room_db
     </sql>
 
     <select id="selectRoomDbList" parameterType="RoomDb" resultMap="RoomDbResult">
         <include refid="selectRoomDbVo"/>
         <where>  
             <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
-            <if test="line != null  and line != ''"> and line = #{line}</if>
-            <if test="area != null  and area != ''"> and area = #{area}</if>
+            <if test="line != null  and line != ''"> and line like concat('%', #{line}, '%')</if>
+            <if test="area != null  and area != ''"> and area like concat('%', #{area}, '%')</if>
             <if test="lever != null  and lever != ''"> and lever = #{lever}</if>
         </where>
     </select>
     
-    <select id="selectRoomDbByName" parameterType="String" resultMap="RoomDbResult">
+    <select id="selectRoomDbById" parameterType="Long" resultMap="RoomDbResult">
         <include refid="selectRoomDbVo"/>
-        where name = #{name}
+        where id = #{id}
     </select>
 
-    <insert id="insertRoomDb" parameterType="RoomDb">
+    <insert id="insertRoomDb" parameterType="RoomDb" useGeneratedKeys="true" keyProperty="id">
         insert into room_db
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="name != null">name,</if>
+            <if test="name != null and name != ''">name,</if>
             <if test="gisLo != null">gis_lo,</if>
             <if test="gisLa != null">gis_la,</if>
-            <if test="line != null">line,</if>
+            <if test="line != null and line != ''">line,</if>
             <if test="jk != null">jk,</if>
             <if test="area != null">area,</if>
             <if test="lever != null">lever,</if>
@@ -63,10 +64,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="total != null">total,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="name != null">#{name},</if>
+            <if test="name != null and name != ''">#{name},</if>
             <if test="gisLo != null">#{gisLo},</if>
             <if test="gisLa != null">#{gisLa},</if>
-            <if test="line != null">#{line},</if>
+            <if test="line != null and line != ''">#{line},</if>
             <if test="jk != null">#{jk},</if>
             <if test="area != null">#{area},</if>
             <if test="lever != null">#{lever},</if>
@@ -85,9 +86,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <update id="updateRoomDb" parameterType="RoomDb">
         update room_db
         <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
             <if test="gisLo != null">gis_lo = #{gisLo},</if>
             <if test="gisLa != null">gis_la = #{gisLa},</if>
-            <if test="line != null">line = #{line},</if>
+            <if test="line != null and line != ''">line = #{line},</if>
             <if test="jk != null">jk = #{jk},</if>
             <if test="area != null">area = #{area},</if>
             <if test="lever != null">lever = #{lever},</if>
@@ -101,17 +103,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="weight != null">weight = #{weight},</if>
             <if test="total != null">total = #{total},</if>
         </trim>
-        where name = #{name}
+        where id = #{id}
     </update>
 
-    <delete id="deleteRoomDbByName" parameterType="String">
-        delete from room_db where name = #{name}
+    <delete id="deleteRoomDbById" parameterType="Long">
+        delete from room_db where id = #{id}
     </delete>
 
-    <delete id="deleteRoomDbByNames" parameterType="String">
-        delete from room_db where name in 
-        <foreach item="name" collection="array" open="(" separator="," close=")">
-            #{name}
+    <delete id="deleteRoomDbByIds" parameterType="String">
+        delete from room_db where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
         </foreach>
     </delete>
 </mapper>

@@ -9,22 +9,21 @@ import com.ruoyi.common.core.domain.BaseEntity;
  * 电池测试对象 ele_db
  * 
  * @author ruoyi
- * @date 2024-11-17
+ * @date 2024-12-26
  */
 public class EleDb extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
     /** 序号 */
-    @Excel(name = "序号")
-    private String eleNum;
+    private Long id;
 
-    /** 所属设备 */
-    @Excel(name = "所属设备")
+    /** 设备 */
+    @Excel(name = "设备")
     private String eleName;
 
-    /** 电池型号 */
-    @Excel(name = "电池型号")
+    /** 型号 */
+    @Excel(name = "型号")
     private String eleType;
 
     /** 组别 */
@@ -35,58 +34,58 @@ public class EleDb extends BaseEntity
     @Excel(name = "单体电池号")
     private String eleGronum;
 
-    /** 内阻 */
-    @Excel(name = "内阻")
+    /** 内阻2024春 */
+    @Excel(name = "内阻2024春")
     private String eleResis;
 
-    /** 电压 */
-    @Excel(name = "电压")
+    /** 电压2024春 */
+    @Excel(name = "电压2024春")
     private String eleVoltage;
 
-    /** 内阻2024春 */
+    /** 内阻2023秋 */
     private String eleResis1;
 
-    /** 电压2024春 */
+    /** 电压2023秋 */
     private String eleVoltage1;
 
-    /** 内阻2023秋 */
+    /** 内阻2023春 */
     private String eleResis2;
 
-    /** 电压2023秋 */
+    /** 电压2023春 */
     private String eleVoltage2;
 
-    /** 内阻2023春 */
+    /** 内阻2022秋 */
     private String eleResis3;
 
-    /** 电压2023春 */
+    /** 电压2022秋 */
     private String eleVoltage3;
 
-    /** 内阻2022秋 */
+    /** 内阻2022春 */
     private String eleResis4;
 
-    /** 电压2022秋 */
+    /** 电压2022春 */
     private String eleVoltage4;
 
-    /** 内阻2022春 */
+    /** 内阻2021秋 */
     private String eleResis5;
 
-    /** 电压2022春 */
+    /** 电压2021秋 */
     private String eleVoltage5;
 
-    /** 内阻2021秋 */
+    /** 内阻2021春 */
     private String eleResis6;
 
-    /** 电压2021秋 */
+    /** 电压2021春 */
     private String eleVoltage6;
 
-    public void setEleNum(String eleNum) 
+    public void setId(Long id) 
     {
-        this.eleNum = eleNum;
+        this.id = id;
     }
 
-    public String getEleNum() 
+    public Long getId() 
     {
-        return eleNum;
+        return id;
     }
     public void setEleName(String eleName) 
     {
@@ -254,7 +253,7 @@ public class EleDb extends BaseEntity
     @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("eleNum", getEleNum())
+            .append("id", getId())
             .append("eleName", getEleName())
             .append("eleType", getEleType())
             .append("eleGroup", getEleGroup())

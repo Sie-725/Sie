@@ -25,7 +25,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
  * 机房信息Controller
  * 
  * @author ruoyi
- * @date 2024-12-10
+ * @date 2024-12-26
  */
 @RestController
 @RequestMapping("/todo/todo_room")
@@ -63,10 +63,10 @@ public class RoomDbController extends BaseController
      * 获取机房信息详细信息
      */
     @PreAuthorize("@ss.hasPermi('todo:todo_room:query')")
-    @GetMapping(value = "/{name}")
-    public AjaxResult getInfo(@PathVariable("name") String name)
+    @GetMapping(value = "/{id}")
+    public AjaxResult getInfo(@PathVariable("id") Long id)
     {
-        return success(roomDbService.selectRoomDbByName(name));
+        return success(roomDbService.selectRoomDbById(id));
     }
 
     /**
@@ -96,9 +96,9 @@ public class RoomDbController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('todo:todo_room:remove')")
     @Log(title = "机房信息", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{names}")
-    public AjaxResult remove(@PathVariable String[] names)
+	@DeleteMapping("/{ids}")
+    public AjaxResult remove(@PathVariable Long[] ids)
     {
-        return toAjax(roomDbService.deleteRoomDbByNames(names));
+        return toAjax(roomDbService.deleteRoomDbByIds(ids));
     }
 }

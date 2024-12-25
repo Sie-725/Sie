@@ -27,7 +27,7 @@
 
                 <el-table v-loading="loading" :data="todo_eleList" @selection-change="handleSelectionChange">
                     <el-table-column type="selection" width="55" align="center" />
-                    <el-table-column label="序号" align="center" prop="eleNum" />
+                    <el-table-column label="序号" align="center" prop="id" />
                     <el-table-column label="所属设备" align="center" prop="eleName" />
                     <el-table-column label="电池型号" align="center" prop="eleType" />
                     <el-table-column label="组别" align="center" prop="eleGroup" />
@@ -93,7 +93,7 @@
     // 表单重置
     function reset() {
         form.value = {
-            eleNum: null,
+            id: null,
             eleName: null,
             eleType: null,
             eleGroup: null,

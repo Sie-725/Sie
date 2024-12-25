@@ -1,10 +1,10 @@
 <template>
   <div class="app-container">
     <el-form :model="queryParams" ref="queryRef" :inline="true" v-show="showSearch" label-width="68px">
-      <el-form-item label="名称" prop="name">
+      <el-form-item label="设备" prop="name">
         <el-input
           v-model="queryParams.name"
-          placeholder="请输入名称"
+          placeholder="请输入设备"
           clearable
           @keyup.enter="handleQuery"
         />
@@ -17,10 +17,10 @@
           @keyup.enter="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="地区" prop="area">
+      <el-form-item label="区域" prop="area">
         <el-input
           v-model="queryParams.area"
-          placeholder="请输入地区"
+          placeholder="请输入区域"
           clearable
           @keyup.enter="handleQuery"
         />
@@ -83,11 +83,12 @@
 
     <el-table v-loading="loading" :data="todo_roomList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="名称" align="center" prop="name" />
+      <el-table-column label="序号" align="center" prop="id" />
+      <el-table-column label="设备" align="center" prop="name" />
       <el-table-column label="经度" align="center" prop="gisLo" />
       <el-table-column label="纬度" align="center" prop="gisLa" />
       <el-table-column label="线路" align="center" prop="line" />
-      <el-table-column label="地区" align="center" prop="area" />
+      <el-table-column label="区域" align="center" prop="area" />
       <el-table-column label="等级" align="center" prop="lever" />
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template #default="scope">
@@ -108,8 +109,8 @@
     <!-- 添加或修改机房信息对话框 -->
     <el-dialog :title="title" v-model="open" width="500px" append-to-body>
       <el-form ref="todo_roomRef" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="名称" prop="name">
-          <el-input v-model="form.name" placeholder="请输入名称" />
+        <el-form-item label="设备" prop="name">
+          <el-input v-model="form.name" placeholder="请输入设备" />
         </el-form-item>
         <el-form-item label="经度" prop="gisLo">
           <el-input v-model="form.gisLo" placeholder="请输入经度" />
@@ -120,8 +121,8 @@
         <el-form-item label="线路" prop="line">
           <el-input v-model="form.line" placeholder="请输入线路" />
         </el-form-item>
-        <el-form-item label="地区" prop="area">
-          <el-input v-model="form.area" placeholder="请输入地区" />
+        <el-form-item label="区域" prop="area">
+          <el-input v-model="form.area" placeholder="请输入区域" />
         </el-form-item>
         <el-form-item label="等级" prop="lever">
           <el-input v-model="form.lever" placeholder="请输入等级" />
@@ -163,6 +164,12 @@ const data = reactive({
     lever: null,
   },
   rules: {
+    name: [
+      { required: true, message: "设备不能为空", trigger: "blur" }
+    ],
+    line: [
+      { required: true, message: "线路不能为空", trigger: "blur" }
+    ],
   }
 });
 
@@ -187,6 +194,7 @@ function cancel() {
 // 表单重置
 function reset() {
   form.value = {
+    id: null,
     name: null,
     gisLo: null,
     gisLa: null,
@@ -221,7 +229,7 @@ function resetQuery() {
 
 // 多选框选中数据
 function handleSelectionChange(selection) {
-  ids.value = selection.map(item => item.name);
+  ids.value = selection.map(item => item.id);
   single.value = selection.length != 1;
   multiple.value = !selection.length;
 }
@@ -236,8 +244,8 @@ function handleAdd() {
 /** 修改按钮操作 */
 function handleUpdate(row) {
   reset();
-  const _name = row.name || ids.value
-  getTodo_room(_name).then(response => {
+  const _id = row.id || ids.value
+  getTodo_room(_id).then(response => {
     form.value = response.data;
     open.value = true;
     title.value = "修改机房信息";
@@ -248,7 +256,7 @@ function handleUpdate(row) {
 function submitForm() {
   proxy.$refs["todo_roomRef"].validate(valid => {
     if (valid) {
-      if (form.value.name != null) {
+      if (form.value.id != null) {
         updateTodo_room(form.value).then(response => {
           proxy.$modal.msgSuccess("修改成功");
           open.value = false;
@@ -267,9 +275,9 @@ function submitForm() {
 
 /** 删除按钮操作 */
 function handleDelete(row) {
-  const _names = row.name || ids.value;
-  proxy.$modal.confirm('是否确认删除机房信息编号为"' + _names + '"的数据项？').then(function() {
-    return delTodo_room(_names);
+  const _ids = row.id || ids.value;
+  proxy.$modal.confirm('是否确认删除机房信息编号为"' + _ids + '"的数据项？').then(function() {
+    return delTodo_room(_ids);
   }).then(() => {
     getList();
     proxy.$modal.msgSuccess("删除成功");

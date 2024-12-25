@@ -7,17 +7,17 @@ import com.ruoyi.todo.domain.EleDb;
  * 电池测试Mapper接口
  * 
  * @author ruoyi
- * @date 2024-11-17
+ * @date 2024-12-26
  */
 public interface EleDbMapper 
 {
     /**
      * 查询电池测试
      * 
-     * @param eleNum 电池测试主键
+     * @param id 电池测试主键
      * @return 电池测试
      */
-    public EleDb selectEleDbByEleNum(String eleNum);
+    public EleDb selectEleDbById(Long id);
 
     /**
      * 查询电池测试列表
@@ -46,16 +46,16 @@ public interface EleDbMapper
     /**
      * 删除电池测试
      * 
-     * @param eleNum 电池测试主键
+     * @param id 电池测试主键
      * @return 结果
      */
-    public int deleteEleDbByEleNum(String eleNum);
+    public int deleteEleDbById(Long id);
 
     /**
      * 批量删除电池测试
      * 
-     * @param eleNums 需要删除的数据主键集合
+     * @param ids 需要删除的数据主键集合
      * @return 结果
      */
-    public int deleteEleDbByEleNums(String[] eleNums);
+    public int deleteEleDbByIds(Long[] ids);
 }

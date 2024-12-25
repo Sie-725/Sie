@@ -9,14 +9,17 @@ import com.ruoyi.common.core.domain.BaseEntity;
  * 机房信息对象 room_db
  * 
  * @author ruoyi
- * @date 2024-12-10
+ * @date 2024-12-26
  */
 public class RoomDb extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
-    /** 名称 */
-    @Excel(name = "名称")
+    /** 序号 */
+    private Long id;
+
+    /** 设备 */
+    @Excel(name = "设备")
     private String name;
 
     /** 经度 */
@@ -31,44 +34,53 @@ public class RoomDb extends BaseEntity
     @Excel(name = "线路")
     private String line;
 
-    /** $column.columnComment */
+    /**  */
     private String jk;
 
-    /** 地区 */
-    @Excel(name = "地区")
+    /** 区域 */
+    @Excel(name = "区域")
     private String area;
 
     /** 等级 */
     @Excel(name = "等级")
     private String lever;
 
-    /** $column.columnComment */
+    /**  */
     private String temperature;
 
-    /** $column.columnComment */
+    /**  */
     private String hardware;
 
-    /** $column.columnComment */
+    /**  */
     private String ledger;
 
-    /** $column.columnComment */
+    /**  */
     private String alarm;
 
-    /** $column.columnComment */
+    /**  */
     private String malfunction;
 
-    /** $column.columnComment */
+    /**  */
     private String indicators;
 
-    /** $column.columnComment */
+    /**  */
     private String life;
 
-    /** $column.columnComment */
+    /**  */
     private String weight;
 
-    /** $column.columnComment */
+    /**  */
     private String total;
 
+    public void setId(Long id) 
+    {
+        this.id = id;
+    }
+
+    public Long getId() 
+    {
+        return id;
+    }
     public void setName(String name) 
     {
         this.name = name;
@@ -217,6 +229,7 @@ public class RoomDb extends BaseEntity
     @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
+            .append("id", getId())
             .append("name", getName())
             .append("gisLo", getGisLo())
             .append("gisLa", getGisLa())

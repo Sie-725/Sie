@@ -15,10 +15,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="type"    column="type"    />
         <result property="factory"    column="factory"    />
         <result property="model"    column="model"    />
+        <result property="power"    column="power"    />
     </resultMap>
 
     <sql id="selectEquipDbVo">
-        select id, system, line, name, life, area, status, type, factory, model from todo_equip_db
+        select id, system, line, name, life, area, status, type, factory, model, power from todo_equip_db
     </sql>
 
     <select id="selectEquipDbList" parameterType="EquipDb" resultMap="EquipDbResult">
@@ -27,9 +28,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="system != null  and system != ''"> and system = #{system}</if>
             <if test="line != null  and line != ''"> and line = #{line}</if>
             <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
-            <if test="life != null  and life != ''"> and life = #{life}</if>
+            <if test="life != null "> and life = #{life}</if>
             <if test="area != null  and area != ''"> and area like concat('%', #{area}, '%')</if>
-            <if test="status != null  and status != ''"> and status = #{status}</if>
             <if test="type != null  and type != ''"> and type like concat('%', #{type}, '%')</if>
             <if test="factory != null  and factory != ''"> and factory like concat('%', #{factory}, '%')</if>
             <if test="model != null  and model != ''"> and model like concat('%', #{model}, '%')</if>
@@ -53,6 +53,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="type != null">type,</if>
             <if test="factory != null">factory,</if>
             <if test="model != null">model,</if>
+            <if test="power != null">power,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="system != null and system != ''">#{system},</if>
@@ -64,6 +65,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="type != null">#{type},</if>
             <if test="factory != null">#{factory},</if>
             <if test="model != null">#{model},</if>
+            <if test="power != null">#{power},</if>
          </trim>
     </insert>
 
@@ -79,6 +81,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="type != null">type = #{type},</if>
             <if test="factory != null">factory = #{factory},</if>
             <if test="model != null">model = #{model},</if>
+            <if test="power != null">power = #{power},</if>
         </trim>
         where id = #{id}
     </update>

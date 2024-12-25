@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.ruoyi.todo.mapper.EleDbMapper">
     
     <resultMap type="EleDb" id="EleDbResult">
-        <result property="eleNum"    column="ele_num"    />
+        <result property="id"    column="id"    />
         <result property="eleName"    column="ele_name"    />
         <result property="eleType"    column="ele_type"    />
         <result property="eleGroup"    column="ele_group"    />
@@ -27,7 +27,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectEleDbVo">
-        select ele_num, ele_name, ele_type, ele_group, ele_gronum, ele_resis, ele_voltage, ele_resis_1, ele_voltage_1, ele_resis_2, ele_voltage_2, ele_resis_3, ele_voltage_3, ele_resis_4, ele_voltage_4, ele_resis_5, ele_voltage_5, ele_resis_6, ele_voltage_6 from ele_db
+        select id, ele_name, ele_type, ele_group, ele_gronum, ele_resis, ele_voltage, ele_resis_1, ele_voltage_1, ele_resis_2, ele_voltage_2, ele_resis_3, ele_voltage_3, ele_resis_4, ele_voltage_4, ele_resis_5, ele_voltage_5, ele_resis_6, ele_voltage_6 from ele_db
     </sql>
 
     <select id="selectEleDbList" parameterType="EleDb" resultMap="EleDbResult">
@@ -39,15 +39,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </where>
     </select>
     
-    <select id="selectEleDbByEleNum" parameterType="String" resultMap="EleDbResult">
+    <select id="selectEleDbById" parameterType="Long" resultMap="EleDbResult">
         <include refid="selectEleDbVo"/>
-        where ele_num = #{eleNum}
+        where id = #{id}
     </select>
 
-    <insert id="insertEleDb" parameterType="EleDb">
+    <insert id="insertEleDb" parameterType="EleDb" useGeneratedKeys="true" keyProperty="id">
         insert into ele_db
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="eleNum != null">ele_num,</if>
             <if test="eleName != null">ele_name,</if>
             <if test="eleType != null">ele_type,</if>
             <if test="eleGroup != null">ele_group,</if>
@@ -68,7 +67,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="eleVoltage6 != null">ele_voltage_6,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="eleNum != null">#{eleNum},</if>
             <if test="eleName != null">#{eleName},</if>
             <if test="eleType != null">#{eleType},</if>
             <if test="eleGroup != null">#{eleGroup},</if>
@@ -112,17 +110,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="eleResis6 != null">ele_resis_6 = #{eleResis6},</if>
             <if test="eleVoltage6 != null">ele_voltage_6 = #{eleVoltage6},</if>
         </trim>
-        where ele_num = #{eleNum}
+        where id = #{id}
     </update>
 
-    <delete id="deleteEleDbByEleNum" parameterType="String">
-        delete from ele_db where ele_num = #{eleNum}
+    <delete id="deleteEleDbById" parameterType="Long">
+        delete from ele_db where id = #{id}
     </delete>
 
-    <delete id="deleteEleDbByEleNums" parameterType="String">
-        delete from ele_db where ele_num in 
-        <foreach item="eleNum" collection="array" open="(" separator="," close=")">
-            #{eleNum}
+    <delete id="deleteEleDbByIds" parameterType="String">
+        delete from ele_db where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
         </foreach>
     </delete>
 </mapper>

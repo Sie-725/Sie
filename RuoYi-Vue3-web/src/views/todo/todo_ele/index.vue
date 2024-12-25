@@ -1,18 +1,18 @@
 <template>
   <div class="app-container">
     <el-form :model="queryParams" ref="queryRef" :inline="true" v-show="showSearch" label-width="68px">
-      <el-form-item label="所属设备" prop="eleName">
+      <el-form-item label="设备" prop="eleName">
         <el-input
           v-model="queryParams.eleName"
-          placeholder="请输入所属设备"
+          placeholder="请输入设备"
           clearable
           @keyup.enter="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="电池型号" prop="eleType">
+      <el-form-item label="型号" prop="eleType">
         <el-input
           v-model="queryParams.eleType"
-          placeholder="请输入电池型号"
+          placeholder="请输入型号"
           clearable
           @keyup.enter="handleQuery"
         />
@@ -75,13 +75,13 @@
 
     <el-table v-loading="loading" :data="todo_eleList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="序号" align="center" prop="eleNum" />
-      <el-table-column label="所属设备" align="center" prop="eleName" />
-      <el-table-column label="电池型号" align="center" prop="eleType" />
+      <el-table-column label="序号" align="center" prop="id" />
+      <el-table-column label="设备" align="center" prop="eleName" />
+      <el-table-column label="型号" align="center" prop="eleType" />
       <el-table-column label="组别" align="center" prop="eleGroup" />
       <el-table-column label="单体电池号" align="center" prop="eleGronum" />
-      <el-table-column label="内阻" align="center" prop="eleResis" />
-      <el-table-column label="电压" align="center" prop="eleVoltage" />
+      <el-table-column label="内阻2024春" align="center" prop="eleResis" />
+      <el-table-column label="电压2024春" align="center" prop="eleVoltage" />
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template #default="scope">
           <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)" v-hasPermi="['todo:todo_ele:edit']">修改</el-button>
@@ -101,14 +101,11 @@
     <!-- 添加或修改电池测试对话框 -->
     <el-dialog :title="title" v-model="open" width="500px" append-to-body>
       <el-form ref="todo_eleRef" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="序号" prop="eleNum">
-          <el-input v-model="form.eleNum" placeholder="请输入序号" />
+        <el-form-item label="设备" prop="eleName">
+          <el-input v-model="form.eleName" placeholder="请输入设备" />
         </el-form-item>
-        <el-form-item label="所属设备" prop="eleName">
-          <el-input v-model="form.eleName" placeholder="请输入所属设备" />
-        </el-form-item>
-        <el-form-item label="电池型号" prop="eleType">
-          <el-input v-model="form.eleType" placeholder="请输入电池型号" />
+        <el-form-item label="型号" prop="eleType">
+          <el-input v-model="form.eleType" placeholder="请输入型号" />
         </el-form-item>
         <el-form-item label="组别" prop="eleGroup">
           <el-input v-model="form.eleGroup" placeholder="请输入组别" />
@@ -116,47 +113,47 @@
         <el-form-item label="单体电池号" prop="eleGronum">
           <el-input v-model="form.eleGronum" placeholder="请输入单体电池号" />
         </el-form-item>
-        <el-form-item label="内阻" prop="eleResis">
-          <el-input v-model="form.eleResis" placeholder="请输入内阻" />
+        <el-form-item label="内阻2024春" prop="eleResis">
+          <el-input v-model="form.eleResis" placeholder="请输入内阻2024春" />
         </el-form-item>
-        <el-form-item label="电压" prop="eleVoltage">
-          <el-input v-model="form.eleVoltage" placeholder="请输入电压" />
+        <el-form-item label="电压2024春" prop="eleVoltage">
+          <el-input v-model="form.eleVoltage" placeholder="请输入电压2024春" />
         </el-form-item>
-        <el-form-item label="内阻2024春" prop="eleResis1">
-          <el-input v-model="form.eleResis1" placeholder="请输入内阻2024春" />
+        <el-form-item label="内阻2023秋" prop="eleResis1">
+          <el-input v-model="form.eleResis1" placeholder="请输入内阻2023秋" />
         </el-form-item>
-        <el-form-item label="电压2024春" prop="eleVoltage1">
-          <el-input v-model="form.eleVoltage1" placeholder="请输入电压2024春" />
+        <el-form-item label="电压2023秋" prop="eleVoltage1">
+          <el-input v-model="form.eleVoltage1" placeholder="请输入电压2023秋" />
         </el-form-item>
-        <el-form-item label="内阻2023秋" prop="eleResis2">
-          <el-input v-model="form.eleResis2" placeholder="请输入内阻2023秋" />
+        <el-form-item label="内阻2023春" prop="eleResis2">
+          <el-input v-model="form.eleResis2" placeholder="请输入内阻2023春" />
         </el-form-item>
-        <el-form-item label="电压2023秋" prop="eleVoltage2">
-          <el-input v-model="form.eleVoltage2" placeholder="请输入电压2023秋" />
+        <el-form-item label="电压2023春" prop="eleVoltage2">
+          <el-input v-model="form.eleVoltage2" placeholder="请输入电压2023春" />
         </el-form-item>
-        <el-form-item label="内阻2023春" prop="eleResis3">
-          <el-input v-model="form.eleResis3" placeholder="请输入内阻2023春" />
+        <el-form-item label="内阻2022秋" prop="eleResis3">
+          <el-input v-model="form.eleResis3" placeholder="请输入内阻2022秋" />
         </el-form-item>
-        <el-form-item label="电压2023春" prop="eleVoltage3">
-          <el-input v-model="form.eleVoltage3" placeholder="请输入电压2023春" />
+        <el-form-item label="电压2022秋" prop="eleVoltage3">
+          <el-input v-model="form.eleVoltage3" placeholder="请输入电压2022秋" />
         </el-form-item>
-        <el-form-item label="内阻2022秋" prop="eleResis4">
-          <el-input v-model="form.eleResis4" placeholder="请输入内阻2022秋" />
+        <el-form-item label="内阻2022春" prop="eleResis4">
+          <el-input v-model="form.eleResis4" placeholder="请输入内阻2022春" />
         </el-form-item>
-        <el-form-item label="电压2022秋" prop="eleVoltage4">
-          <el-input v-model="form.eleVoltage4" placeholder="请输入电压2022秋" />
+        <el-form-item label="电压2022春" prop="eleVoltage4">
+          <el-input v-model="form.eleVoltage4" placeholder="请输入电压2022春" />
         </el-form-item>
-        <el-form-item label="内阻2022春" prop="eleResis5">
-          <el-input v-model="form.eleResis5" placeholder="请输入内阻2022春" />
+        <el-form-item label="内阻2021秋" prop="eleResis5">
+          <el-input v-model="form.eleResis5" placeholder="请输入内阻2021秋" />
         </el-form-item>
-        <el-form-item label="电压2022春" prop="eleVoltage5">
-          <el-input v-model="form.eleVoltage5" placeholder="请输入电压2022春" />
+        <el-form-item label="电压2021秋" prop="eleVoltage5">
+          <el-input v-model="form.eleVoltage5" placeholder="请输入电压2021秋" />
         </el-form-item>
-        <el-form-item label="内阻2021秋" prop="eleResis6">
-          <el-input v-model="form.eleResis6" placeholder="请输入内阻2021秋" />
+        <el-form-item label="内阻2021春" prop="eleResis6">
+          <el-input v-model="form.eleResis6" placeholder="请输入内阻2021春" />
         </el-form-item>
-        <el-form-item label="电压2021秋" prop="eleVoltage6">
-          <el-input v-model="form.eleVoltage6" placeholder="请输入电压2021秋" />
+        <el-form-item label="电压2021春" prop="eleVoltage6">
+          <el-input v-model="form.eleVoltage6" placeholder="请输入电压2021春" />
         </el-form-item>
       </el-form>
       <template #footer>
@@ -209,10 +206,16 @@ function getList() {
   });
 }
 
+// 取消按钮
+function cancel() {
+  open.value = false;
+  reset();
+}
+
 // 表单重置
 function reset() {
   form.value = {
-    eleNum: null,
+    id: null,
     eleName: null,
     eleType: null,
     eleGroup: null,
@@ -249,7 +252,7 @@ function resetQuery() {
 
 // 多选框选中数据
 function handleSelectionChange(selection) {
-  ids.value = selection.map(item => item.eleNum);
+  ids.value = selection.map(item => item.id);
   single.value = selection.length != 1;
   multiple.value = !selection.length;
 }
@@ -264,8 +267,8 @@ function handleAdd() {
 /** 修改按钮操作 */
 function handleUpdate(row) {
   reset();
-  const _eleNum = row.eleNum || ids.value
-  getTodo_ele(_eleNum).then(response => {
+  const _id = row.id || ids.value
+  getTodo_ele(_id).then(response => {
     form.value = response.data;
     open.value = true;
     title.value = "修改电池测试";
@@ -276,7 +279,7 @@ function handleUpdate(row) {
 function submitForm() {
   proxy.$refs["todo_eleRef"].validate(valid => {
     if (valid) {
-      if (form.value.eleNum != null) {
+      if (form.value.id != null) {
         updateTodo_ele(form.value).then(response => {
           proxy.$modal.msgSuccess("修改成功");
           open.value = false;
@@ -295,9 +298,9 @@ function submitForm() {
 
 /** 删除按钮操作 */
 function handleDelete(row) {
-  const _eleNums = row.eleNum || ids.value;
-  proxy.$modal.confirm('是否确认删除电池测试编号为"' + _eleNums + '"的数据项？').then(function() {
-    return delTodo_ele(_eleNums);
+  const _ids = row.id || ids.value;
+  proxy.$modal.confirm('是否确认删除电池测试编号为"' + _ids + '"的数据项？').then(function() {
+    return delTodo_ele(_ids);
   }).then(() => {
     getList();
     proxy.$modal.msgSuccess("删除成功");

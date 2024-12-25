@@ -1,5 +1,7 @@
 package com.ruoyi.todo.domain;
 
+import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.common.annotation.Excel;
@@ -31,15 +33,15 @@ public class EquipDb extends BaseEntity
     private String name;
 
     /** 运行时间 */
-    @Excel(name = "运行时间")
-    private String life;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @Excel(name = "运行时间", width = 30, dateFormat = "yyyy-MM-dd")
+    private Date life;
 
     /** 地区 */
     @Excel(name = "地区")
     private String area;
 
     /** 状态 */
-    @Excel(name = "状态")
     private String status;
 
     /** 类型 */
@@ -53,6 +55,10 @@ public class EquipDb extends BaseEntity
     /** 型号 */
     @Excel(name = "型号")
     private String model;
+
+    /** 功耗 */
+    @Excel(name = "功耗")
+    private String power;
 
     public void setId(Long id) 
     {
@@ -90,12 +96,12 @@ public class EquipDb extends BaseEntity
     {
         return name;
     }
-    public void setLife(String life) 
+    public void setLife(Date life) 
     {
         this.life = life;
     }
 
-    public String getLife() 
+    public Date getLife() 
     {
         return life;
     }
@@ -144,6 +150,15 @@ public class EquipDb extends BaseEntity
     {
         return model;
     }
+    public void setPower(String power) 
+    {
+        this.power = power;
+    }
+
+    public String getPower() 
+    {
+        return power;
+    }
 
     @Override
     public String toString() {
@@ -158,6 +173,7 @@ public class EquipDb extends BaseEntity
             .append("type", getType())
             .append("factory", getFactory())
             .append("model", getModel())
+            .append("power", getPower())
             .toString();
     }
 }

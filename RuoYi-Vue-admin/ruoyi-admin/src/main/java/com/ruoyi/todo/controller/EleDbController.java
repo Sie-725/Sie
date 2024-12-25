@@ -25,7 +25,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
  * 电池测试Controller
  * 
  * @author ruoyi
- * @date 2024-11-17
+ * @date 2024-12-26
  */
 @RestController
 @RequestMapping("/todo/todo_ele")
@@ -63,10 +63,10 @@ public class EleDbController extends BaseController
      * 获取电池测试详细信息
      */
     @PreAuthorize("@ss.hasPermi('todo:todo_ele:query')")
-    @GetMapping(value = "/{eleNum}")
-    public AjaxResult getInfo(@PathVariable("eleNum") String eleNum)
+    @GetMapping(value = "/{id}")
+    public AjaxResult getInfo(@PathVariable("id") Long id)
     {
-        return success(eleDbService.selectEleDbByEleNum(eleNum));
+        return success(eleDbService.selectEleDbById(id));
     }
 
     /**
@@ -96,9 +96,9 @@ public class EleDbController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('todo:todo_ele:remove')")
     @Log(title = "电池测试", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{eleNums}")
-    public AjaxResult remove(@PathVariable String[] eleNums)
+	@DeleteMapping("/{ids}")
+    public AjaxResult remove(@PathVariable Long[] ids)
     {
-        return toAjax(eleDbService.deleteEleDbByEleNums(eleNums));
+        return toAjax(eleDbService.deleteEleDbByIds(ids));
     }
 }

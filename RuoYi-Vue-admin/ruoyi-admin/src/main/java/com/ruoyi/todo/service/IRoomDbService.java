@@ -7,17 +7,17 @@ import com.ruoyi.todo.domain.RoomDb;
  * 机房信息Service接口
  * 
  * @author ruoyi
- * @date 2024-12-10
+ * @date 2024-12-26
  */
 public interface IRoomDbService 
 {
     /**
      * 查询机房信息
      * 
-     * @param name 机房信息主键
+     * @param id 机房信息主键
      * @return 机房信息
      */
-    public RoomDb selectRoomDbByName(String name);
+    public RoomDb selectRoomDbById(Long id);
 
     /**
      * 查询机房信息列表
@@ -46,16 +46,16 @@ public interface IRoomDbService
     /**
      * 批量删除机房信息
      * 
-     * @param names 需要删除的机房信息主键集合
+     * @param ids 需要删除的机房信息主键集合
      * @return 结果
      */
-    public int deleteRoomDbByNames(String[] names);
+    public int deleteRoomDbByIds(Long[] ids);
 
     /**
      * 删除机房信息信息
      * 
-     * @param name 机房信息主键
+     * @param id 机房信息主键
      * @return 结果
      */
-    public int deleteRoomDbByName(String name);
+    public int deleteRoomDbById(Long id);
 }

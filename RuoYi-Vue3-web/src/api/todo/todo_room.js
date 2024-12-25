@@ -10,9 +10,9 @@ export function listTodo_room(query) {
 }
 
 // 查询机房信息详细
-export function getTodo_room(name) {
+export function getTodo_room(id) {
   return request({
-    url: '/todo/todo_room/' + name,
+    url: '/todo/todo_room/' + id,
     method: 'get'
   })
 }
@@ -36,9 +36,9 @@ export function updateTodo_room(data) {
 }
 
 // 删除机房信息
-export function delTodo_room(name) {
+export function delTodo_room(id) {
   return request({
-    url: '/todo/todo_room/' + name,
+    url: '/todo/todo_room/' + id,
     method: 'delete'
   })
 }

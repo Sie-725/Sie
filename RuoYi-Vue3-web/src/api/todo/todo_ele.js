@@ -10,9 +10,9 @@ export function listTodo_ele(query) {
 }
 
 // 查询电池测试详细
-export function getTodo_ele(eleNum) {
+export function getTodo_ele(id) {
   return request({
-    url: '/todo/todo_ele/' + eleNum,
+    url: '/todo/todo_ele/' + id,
     method: 'get'
   })
 }
@@ -36,9 +36,9 @@ export function updateTodo_ele(data) {
 }
 
 // 删除电池测试
-export function delTodo_ele(eleNum) {
+export function delTodo_ele(id) {
   return request({
-    url: '/todo/todo_ele/' + eleNum,
+    url: '/todo/todo_ele/' + id,
     method: 'delete'
   })
 }

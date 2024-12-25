@@ -86,7 +86,7 @@
                     :cell-style="cellStyle"
                     >
                     <el-table-column type="selection" width="55" align="center" />
-                    <el-table-column label="序号" align="center" prop="eleNum" />
+                    <el-table-column label="序号" align="center" prop="id" />
                     <el-table-column label="所属设备" align="center" prop="eleName" />
                     <el-table-column label="电池型号" align="center" prop="eleType" />
                     <el-table-column label="组别" align="center" prop="eleGroup" />
@@ -111,9 +111,6 @@
                 <!-- 添加或修改电池测试对话框 -->
                 <el-dialog :title="title" v-model="open" width="500px" append-to-body>
                 <el-form ref="todo_eleRef" :model="form" :rules="rules" label-width="80px">
-                    <el-form-item label="序号" prop="eleNum">
-                    <el-input v-model="form.eleNum" placeholder="请输入序号" />
-                    </el-form-item>
                     <el-form-item label="所属设备" prop="eleName">
                     <el-input v-model="form.eleName" placeholder="请输入所属设备" />
                     </el-form-item>
@@ -204,6 +201,15 @@
         eleGroup: null,
     },
     rules: {
+        eleName: [
+        { required: true, message: "设备不能为空", trigger: "blur" }
+        ],
+        eleGroup: [
+        { required: true, message: "线路不能为空", trigger: "blur" }
+        ],
+        eleGronum:[
+        { required: true, message: "线路不能为空", trigger: "blur" }
+        ],
     }
     });
 
@@ -226,7 +232,7 @@
     // 表单重置
     function reset() {
         form.value = {
-            eleNum: null,
+            id: null,
             eleName: null,
             eleType: null,
             eleGroup: null,
@@ -263,7 +269,7 @@
 
         // 多选框选中数据
         function handleSelectionChange(selection) {
-        ids.value = selection.map(item => item.eleNum);
+        ids.value = selection.map(item => item.id);
         single.value = selection.length != 1;
         multiple.value = !selection.length;
         }
@@ -278,8 +284,8 @@
         /** 修改按钮操作 */
         function handleUpdate(row) {
         reset();
-        const _eleNum = row.eleNum || ids.value
-        getTodo_ele(_eleNum).then(response => {
+        const _id = row.id || ids.value
+        getTodo_ele(_id).then(response => {
             form.value = response.data;
             open.value = true;
             title.value = "修改电池测试";
@@ -290,7 +296,7 @@
         function submitForm() {
         proxy.$refs["todo_eleRef"].validate(valid => {
             if (valid) {
-            if (form.value.eleNum != null) {
+            if (form.value.id != null) {
                 updateTodo_ele(form.value).then(response => {
                 proxy.$modal.msgSuccess("修改成功");
                 open.value = false;
@@ -309,9 +315,9 @@
 
         /** 删除按钮操作 */
         function handleDelete(row) {
-        const _eleNums = row.eleNum || ids.value;
-        proxy.$modal.confirm('是否确认删除电池测试编号为"' + _eleNums + '"的数据项？').then(function() {
-            return delTodo_ele(_eleNums);
+        const _ids = row.id || ids.value;
+        proxy.$modal.confirm('是否确认删除电池测试编号为"' + _ids + '"的数据项？').then(function() {
+            return delTodo_ele(_ids);
         }).then(() => {
             getList();
             proxy.$modal.msgSuccess("删除成功");

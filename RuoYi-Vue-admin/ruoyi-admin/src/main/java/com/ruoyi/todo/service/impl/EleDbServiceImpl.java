@@ -11,7 +11,7 @@ import com.ruoyi.todo.service.IEleDbService;
  * 电池测试Service业务层处理
  * 
  * @author ruoyi
- * @date 2024-11-17
+ * @date 2024-12-26
  */
 @Service
 public class EleDbServiceImpl implements IEleDbService 
@@ -22,13 +22,13 @@ public class EleDbServiceImpl implements IEleDbService
     /**
      * 查询电池测试
      * 
-     * @param eleNum 电池测试主键
+     * @param id 电池测试主键
      * @return 电池测试
      */
     @Override
-    public EleDb selectEleDbByEleNum(String eleNum)
+    public EleDb selectEleDbById(Long id)
     {
-        return eleDbMapper.selectEleDbByEleNum(eleNum);
+        return eleDbMapper.selectEleDbById(id);
     }
 
     /**
@@ -70,24 +70,24 @@ public class EleDbServiceImpl implements IEleDbService
     /**
      * 批量删除电池测试
      * 
-     * @param eleNums 需要删除的电池测试主键
+     * @param ids 需要删除的电池测试主键
      * @return 结果
      */
     @Override
-    public int deleteEleDbByEleNums(String[] eleNums)
+    public int deleteEleDbByIds(Long[] ids)
     {
-        return eleDbMapper.deleteEleDbByEleNums(eleNums);
+        return eleDbMapper.deleteEleDbByIds(ids);
     }
 
     /**
      * 删除电池测试信息
      * 
-     * @param eleNum 电池测试主键
+     * @param id 电池测试主键
      * @return 结果
      */
     @Override
-    public int deleteEleDbByEleNum(String eleNum)
+    public int deleteEleDbById(Long id)
     {
-        return eleDbMapper.deleteEleDbByEleNum(eleNum);
+        return eleDbMapper.deleteEleDbById(id);
     }
 }

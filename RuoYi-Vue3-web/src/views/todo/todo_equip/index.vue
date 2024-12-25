@@ -41,14 +41,6 @@
           @keyup.enter="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="状态" prop="status">
-        <el-input
-          v-model="queryParams.status"
-          placeholder="请输入状态"
-          clearable
-          @keyup.enter="handleQuery"
-        />
-      </el-form-item>
       <el-form-item label="类型" prop="type">
         <el-input
           v-model="queryParams.type"
@@ -129,10 +121,10 @@
       <el-table-column label="设备" align="center" prop="name" />
       <el-table-column label="运行时间" align="center" prop="life" />
       <el-table-column label="地区" align="center" prop="area" />
-      <el-table-column label="状态" align="center" prop="status" />
       <el-table-column label="类型" align="center" prop="type" />
       <el-table-column label="厂家" align="center" prop="factory" />
       <el-table-column label="型号" align="center" prop="model" />
+      <el-table-column label="功耗" align="center" prop="power" />
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template #default="scope">
           <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)" v-hasPermi="['todo:todo_equip:edit']">修改</el-button>
@@ -179,6 +171,9 @@
         <el-form-item label="型号" prop="model">
           <el-input v-model="form.model" placeholder="请输入型号" />
         </el-form-item>
+        <el-form-item label="功耗" prop="power">
+          <el-input v-model="form.power" placeholder="请输入功耗" />
+        </el-form-item>
       </el-form>
       <template #footer>
         <div class="dialog-footer">
@@ -215,10 +210,9 @@ const data = reactive({
     name: null,
     life: null,
     area: null,
-    status: null,
     type: null,
     factory: null,
-    model: null
+    model: null,
   },
   rules: {
     system: [
@@ -263,7 +257,8 @@ function reset() {
     status: null,
     type: null,
     factory: null,
-    model: null
+    model: null,
+    power: null
   };
   proxy.resetForm("todo_equipRef");
 }

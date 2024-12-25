@@ -11,7 +11,7 @@ import com.ruoyi.todo.service.IRoomDbService;
  * 机房信息Service业务层处理
  * 
  * @author ruoyi
- * @date 2024-12-10
+ * @date 2024-12-26
  */
 @Service
 public class RoomDbServiceImpl implements IRoomDbService 
@@ -22,13 +22,13 @@ public class RoomDbServiceImpl implements IRoomDbService
     /**
      * 查询机房信息
      * 
-     * @param name 机房信息主键
+     * @param id 机房信息主键
      * @return 机房信息
      */
     @Override
-    public RoomDb selectRoomDbByName(String name)
+    public RoomDb selectRoomDbById(Long id)
     {
-        return roomDbMapper.selectRoomDbByName(name);
+        return roomDbMapper.selectRoomDbById(id);
     }
 
     /**
@@ -70,24 +70,24 @@ public class RoomDbServiceImpl implements IRoomDbService
     /**
      * 批量删除机房信息
      * 
-     * @param names 需要删除的机房信息主键
+     * @param ids 需要删除的机房信息主键
      * @return 结果
      */
     @Override
-    public int deleteRoomDbByNames(String[] names)
+    public int deleteRoomDbByIds(Long[] ids)
     {
-        return roomDbMapper.deleteRoomDbByNames(names);
+        return roomDbMapper.deleteRoomDbByIds(ids);
     }
 
     /**
      * 删除机房信息信息
      * 
-     * @param name 机房信息主键
+     * @param id 机房信息主键
      * @return 结果
      */
     @Override
-    public int deleteRoomDbByName(String name)
+    public int deleteRoomDbById(Long id)
     {
-        return roomDbMapper.deleteRoomDbByName(name);
+        return roomDbMapper.deleteRoomDbById(id);
     }
 }
