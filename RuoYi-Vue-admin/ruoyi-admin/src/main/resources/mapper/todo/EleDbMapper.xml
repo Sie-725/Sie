@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.todo.mapper.EleDbMapper">
+    
+    <resultMap type="EleDb" id="EleDbResult">
+        <result property="id"    column="id"    />
+        <result property="eleName"    column="ele_name"    />
+        <result property="eleType"    column="ele_type"    />
+        <result property="eleGroup"    column="ele_group"    />
+        <result property="eleGronum"    column="ele_gronum"    />
+        <result property="eleResis"    column="ele_resis"    />
+        <result property="eleVoltage"    column="ele_voltage"    />
+        <result property="eleResis1"    column="ele_resis_1"    />
+        <result property="eleVoltage1"    column="ele_voltage_1"    />
+        <result property="eleResis2"    column="ele_resis_2"    />
+        <result property="eleVoltage2"    column="ele_voltage_2"    />
+        <result property="eleResis3"    column="ele_resis_3"    />
+        <result property="eleVoltage3"    column="ele_voltage_3"    />
+        <result property="eleResis4"    column="ele_resis_4"    />
+        <result property="eleVoltage4"    column="ele_voltage_4"    />
+        <result property="eleResis5"    column="ele_resis_5"    />
+        <result property="eleVoltage5"    column="ele_voltage_5"    />
+        <result property="eleResis6"    column="ele_resis_6"    />
+        <result property="eleVoltage6"    column="ele_voltage_6"    />
+    </resultMap>
+
+    <sql id="selectEleDbVo">
+        select id, ele_name, ele_type, ele_group, ele_gronum, ele_resis, ele_voltage, ele_resis_1, ele_voltage_1, ele_resis_2, ele_voltage_2, ele_resis_3, ele_voltage_3, ele_resis_4, ele_voltage_4, ele_resis_5, ele_voltage_5, ele_resis_6, ele_voltage_6 from ele_db
+    </sql>
+
+    <select id="selectEleDbList" parameterType="EleDb" resultMap="EleDbResult">
+        <include refid="selectEleDbVo"/>
+        <where>  
+            <if test="eleName != null  and eleName != ''"> and ele_name like concat('%', #{eleName}, '%')</if>
+            <if test="eleType != null  and eleType != ''"> and ele_type like concat('%', #{eleType}, '%')</if>
+            <if test="eleGroup != null  and eleGroup != ''"> and ele_group = #{eleGroup}</if>
+        </where>
+    </select>
+    
+    <select id="selectEleDbById" parameterType="Long" resultMap="EleDbResult">
+        <include refid="selectEleDbVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertEleDb" parameterType="EleDb" useGeneratedKeys="true" keyProperty="id">
+        insert into ele_db
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="eleName != null">ele_name,</if>
+            <if test="eleType != null">ele_type,</if>
+            <if test="eleGroup != null">ele_group,</if>
+            <if test="eleGronum != null">ele_gronum,</if>
+            <if test="eleResis != null">ele_resis,</if>
+            <if test="eleVoltage != null">ele_voltage,</if>
+            <if test="eleResis1 != null">ele_resis_1,</if>
+            <if test="eleVoltage1 != null">ele_voltage_1,</if>
+            <if test="eleResis2 != null">ele_resis_2,</if>
+            <if test="eleVoltage2 != null">ele_voltage_2,</if>
+            <if test="eleResis3 != null">ele_resis_3,</if>
+            <if test="eleVoltage3 != null">ele_voltage_3,</if>
+            <if test="eleResis4 != null">ele_resis_4,</if>
+            <if test="eleVoltage4 != null">ele_voltage_4,</if>
+            <if test="eleResis5 != null">ele_resis_5,</if>
+            <if test="eleVoltage5 != null">ele_voltage_5,</if>
+            <if test="eleResis6 != null">ele_resis_6,</if>
+            <if test="eleVoltage6 != null">ele_voltage_6,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="eleName != null">#{eleName},</if>
+            <if test="eleType != null">#{eleType},</if>
+            <if test="eleGroup != null">#{eleGroup},</if>
+            <if test="eleGronum != null">#{eleGronum},</if>
+            <if test="eleResis != null">#{eleResis},</if>
+            <if test="eleVoltage != null">#{eleVoltage},</if>
+            <if test="eleResis1 != null">#{eleResis1},</if>
+            <if test="eleVoltage1 != null">#{eleVoltage1},</if>
+            <if test="eleResis2 != null">#{eleResis2},</if>
+            <if test="eleVoltage2 != null">#{eleVoltage2},</if>
+            <if test="eleResis3 != null">#{eleResis3},</if>
+            <if test="eleVoltage3 != null">#{eleVoltage3},</if>
+            <if test="eleResis4 != null">#{eleResis4},</if>
+            <if test="eleVoltage4 != null">#{eleVoltage4},</if>
+            <if test="eleResis5 != null">#{eleResis5},</if>
+            <if test="eleVoltage5 != null">#{eleVoltage5},</if>
+            <if test="eleResis6 != null">#{eleResis6},</if>
+            <if test="eleVoltage6 != null">#{eleVoltage6},</if>
+         </trim>
+    </insert>
+
+    <update id="updateEleDb" parameterType="EleDb">
+        update ele_db
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="eleName != null">ele_name = #{eleName},</if>
+            <if test="eleType != null">ele_type = #{eleType},</if>
+            <if test="eleGroup != null">ele_group = #{eleGroup},</if>
+            <if test="eleGronum != null">ele_gronum = #{eleGronum},</if>
+            <if test="eleResis != null">ele_resis = #{eleResis},</if>
+            <if test="eleVoltage != null">ele_voltage = #{eleVoltage},</if>
+            <if test="eleResis1 != null">ele_resis_1 = #{eleResis1},</if>
+            <if test="eleVoltage1 != null">ele_voltage_1 = #{eleVoltage1},</if>
+            <if test="eleResis2 != null">ele_resis_2 = #{eleResis2},</if>
+            <if test="eleVoltage2 != null">ele_voltage_2 = #{eleVoltage2},</if>
+            <if test="eleResis3 != null">ele_resis_3 = #{eleResis3},</if>
+            <if test="eleVoltage3 != null">ele_voltage_3 = #{eleVoltage3},</if>
+            <if test="eleResis4 != null">ele_resis_4 = #{eleResis4},</if>
+            <if test="eleVoltage4 != null">ele_voltage_4 = #{eleVoltage4},</if>
+            <if test="eleResis5 != null">ele_resis_5 = #{eleResis5},</if>
+            <if test="eleVoltage5 != null">ele_voltage_5 = #{eleVoltage5},</if>
+            <if test="eleResis6 != null">ele_resis_6 = #{eleResis6},</if>
+            <if test="eleVoltage6 != null">ele_voltage_6 = #{eleVoltage6},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteEleDbById" parameterType="Long">
+        delete from ele_db where id = #{id}
+    </delete>
+
+    <delete id="deleteEleDbByIds" parameterType="String">
+        delete from ele_db where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

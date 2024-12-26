@@ -506,7 +506,11 @@ export default {
             ...datasetWithFilters
             ],
             title: {
+<<<<<<< HEAD
             text: '电池内阻总对比'
+=======
+            text: '电池电阻总对比'
+>>>>>>> 0e9479347ad024ab7f5381dcb8ca8366da2858f8
             },
             tooltip: {
             order: 'valueDesc',

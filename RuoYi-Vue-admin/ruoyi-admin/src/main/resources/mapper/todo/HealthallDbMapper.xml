@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.todo.mapper.HealthallDbMapper">
+    
+    <resultMap type="HealthallDb" id="HealthallDbResult">
+        <result property="name"    column="name"    />
+        <result property="gisLo"    column="gis_lo"    />
+        <result property="gisLa"    column="gis_la"    />
+        <result property="line"    column="line"    />
+        <result property="jk"    column="jk"    />
+        <result property="area"    column="area"    />
+        <result property="lever"    column="lever"    />
+        <result property="temperature"    column="temperature"    />
+        <result property="hardware"    column="hardware"    />
+        <result property="ledger"    column="ledger"    />
+        <result property="alarm"    column="alarm"    />
+        <result property="malfunction"    column="malfunction"    />
+        <result property="indicators"    column="indicators"    />
+        <result property="life"    column="life"    />
+        <result property="weight"    column="weight"    />
+        <result property="total"    column="total"    />
+        <result property="kwh"    column="kwh"    />
+    </resultMap>
+
+    <sql id="selectHealthallDbVo">
+        select name, gis_lo, gis_la, line, jk, area, lever, temperature, hardware, ledger, alarm, malfunction, indicators, life, weight, total, kwh from healthall_db
+    </sql>
+
+    <select id="selectHealthallDbList" parameterType="HealthallDb" resultMap="HealthallDbResult">
+        <include refid="selectHealthallDbVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="line != null  and line != ''"> and line = #{line}</if>
+            <if test="area != null  and area != ''"> and area = #{area}</if>
+        </where>
+    </select>
+    
+    <select id="selectHealthallDbByName" parameterType="String" resultMap="HealthallDbResult">
+        <include refid="selectHealthallDbVo"/>
+        where name = #{name}
+    </select>
+
+    <insert id="insertHealthallDb" parameterType="HealthallDb">
+        insert into healthall_db
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null">name,</if>
+            <if test="gisLo != null">gis_lo,</if>
+            <if test="gisLa != null">gis_la,</if>
+            <if test="line != null">line,</if>
+            <if test="jk != null">jk,</if>
+            <if test="area != null">area,</if>
+            <if test="lever != null">lever,</if>
+            <if test="temperature != null">temperature,</if>
+            <if test="hardware != null">hardware,</if>
+            <if test="ledger != null">ledger,</if>
+            <if test="alarm != null">alarm,</if>
+            <if test="malfunction != null">malfunction,</if>
+            <if test="indicators != null">indicators,</if>
+            <if test="life != null">life,</if>
+            <if test="weight != null">weight,</if>
+            <if test="total != null">total,</if>
+            <if test="kwh != null">kwh,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null">#{name},</if>
+            <if test="gisLo != null">#{gisLo},</if>
+            <if test="gisLa != null">#{gisLa},</if>
+            <if test="line != null">#{line},</if>
+            <if test="jk != null">#{jk},</if>
+            <if test="area != null">#{area},</if>
+            <if test="lever != null">#{lever},</if>
+            <if test="temperature != null">#{temperature},</if>
+            <if test="hardware != null">#{hardware},</if>
+            <if test="ledger != null">#{ledger},</if>
+            <if test="alarm != null">#{alarm},</if>
+            <if test="malfunction != null">#{malfunction},</if>
+            <if test="indicators != null">#{indicators},</if>
+            <if test="life != null">#{life},</if>
+            <if test="weight != null">#{weight},</if>
+            <if test="total != null">#{total},</if>
+            <if test="kwh != null">#{kwh},</if>
+         </trim>
+    </insert>
+
+    <update id="updateHealthallDb" parameterType="HealthallDb">
+        update healthall_db
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="gisLo != null">gis_lo = #{gisLo},</if>
+            <if test="gisLa != null">gis_la = #{gisLa},</if>
+            <if test="line != null">line = #{line},</if>
+            <if test="jk != null">jk = #{jk},</if>
+            <if test="area != null">area = #{area},</if>
+            <if test="lever != null">lever = #{lever},</if>
+            <if test="temperature != null">temperature = #{temperature},</if>
+            <if test="hardware != null">hardware = #{hardware},</if>
+            <if test="ledger != null">ledger = #{ledger},</if>
+            <if test="alarm != null">alarm = #{alarm},</if>
+            <if test="malfunction != null">malfunction = #{malfunction},</if>
+            <if test="indicators != null">indicators = #{indicators},</if>
+            <if test="life != null">life = #{life},</if>
+            <if test="weight != null">weight = #{weight},</if>
+            <if test="total != null">total = #{total},</if>
+            <if test="kwh != null">kwh = #{kwh},</if>
+        </trim>
+        where name = #{name}
+    </update>
+
+    <delete id="deleteHealthallDbByName" parameterType="String">
+        delete from healthall_db where name = #{name}
+    </delete>
+
+    <delete id="deleteHealthallDbByNames" parameterType="String">
+        delete from healthall_db where name in 
+        <foreach item="name" collection="array" open="(" separator="," close=")">
+            #{name}
+        </foreach>
+    </delete>
+</mapper>

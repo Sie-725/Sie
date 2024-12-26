@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.todo.mapper.RoomDbMapper">
+    
+    <resultMap type="RoomDb" id="RoomDbResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="gisLo"    column="gis_lo"    />
+        <result property="gisLa"    column="gis_la"    />
+        <result property="line"    column="line"    />
+        <result property="jk"    column="jk"    />
+        <result property="area"    column="area"    />
+        <result property="lever"    column="lever"    />
+        <result property="temperature"    column="temperature"    />
+        <result property="hardware"    column="hardware"    />
+        <result property="ledger"    column="ledger"    />
+        <result property="alarm"    column="alarm"    />
+        <result property="malfunction"    column="malfunction"    />
+        <result property="indicators"    column="indicators"    />
+        <result property="life"    column="life"    />
+        <result property="weight"    column="weight"    />
+        <result property="total"    column="total"    />
+    </resultMap>
+
+    <sql id="selectRoomDbVo">
+        select id, name, gis_lo, gis_la, line, jk, area, lever, temperature, hardware, ledger, alarm, malfunction, indicators, life, weight, total from room_db
+    </sql>
+
+    <select id="selectRoomDbList" parameterType="RoomDb" resultMap="RoomDbResult">
+        <include refid="selectRoomDbVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="line != null  and line != ''"> and line like concat('%', #{line}, '%')</if>
+            <if test="area != null  and area != ''"> and area like concat('%', #{area}, '%')</if>
+            <if test="lever != null  and lever != ''"> and lever = #{lever}</if>
+        </where>
+    </select>
+    
+    <select id="selectRoomDbById" parameterType="Long" resultMap="RoomDbResult">
+        <include refid="selectRoomDbVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertRoomDb" parameterType="RoomDb" useGeneratedKeys="true" keyProperty="id">
+        insert into room_db
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">name,</if>
+            <if test="gisLo != null">gis_lo,</if>
+            <if test="gisLa != null">gis_la,</if>
+            <if test="line != null and line != ''">line,</if>
+            <if test="jk != null">jk,</if>
+            <if test="area != null">area,</if>
+            <if test="lever != null">lever,</if>
+            <if test="temperature != null">temperature,</if>
+            <if test="hardware != null">hardware,</if>
+            <if test="ledger != null">ledger,</if>
+            <if test="alarm != null">alarm,</if>
+            <if test="malfunction != null">malfunction,</if>
+            <if test="indicators != null">indicators,</if>
+            <if test="life != null">life,</if>
+            <if test="weight != null">weight,</if>
+            <if test="total != null">total,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="gisLo != null">#{gisLo},</if>
+            <if test="gisLa != null">#{gisLa},</if>
+            <if test="line != null and line != ''">#{line},</if>
+            <if test="jk != null">#{jk},</if>
+            <if test="area != null">#{area},</if>
+            <if test="lever != null">#{lever},</if>
+            <if test="temperature != null">#{temperature},</if>
+            <if test="hardware != null">#{hardware},</if>
+            <if test="ledger != null">#{ledger},</if>
+            <if test="alarm != null">#{alarm},</if>
+            <if test="malfunction != null">#{malfunction},</if>
+            <if test="indicators != null">#{indicators},</if>
+            <if test="life != null">#{life},</if>
+            <if test="weight != null">#{weight},</if>
+            <if test="total != null">#{total},</if>
+         </trim>
+    </insert>
+
+    <update id="updateRoomDb" parameterType="RoomDb">
+        update room_db
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="gisLo != null">gis_lo = #{gisLo},</if>
+            <if test="gisLa != null">gis_la = #{gisLa},</if>
+            <if test="line != null and line != ''">line = #{line},</if>
+            <if test="jk != null">jk = #{jk},</if>
+            <if test="area != null">area = #{area},</if>
+            <if test="lever != null">lever = #{lever},</if>
+            <if test="temperature != null">temperature = #{temperature},</if>
+            <if test="hardware != null">hardware = #{hardware},</if>
+            <if test="ledger != null">ledger = #{ledger},</if>
+            <if test="alarm != null">alarm = #{alarm},</if>
+            <if test="malfunction != null">malfunction = #{malfunction},</if>
+            <if test="indicators != null">indicators = #{indicators},</if>
+            <if test="life != null">life = #{life},</if>
+            <if test="weight != null">weight = #{weight},</if>
+            <if test="total != null">total = #{total},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteRoomDbById" parameterType="Long">
+        delete from room_db where id = #{id}
+    </delete>
+
+    <delete id="deleteRoomDbByIds" parameterType="String">
+        delete from room_db where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,13 +1,23 @@
 <template>
     <div class="container">
+<<<<<<< HEAD
         <!-- <div class="no1" ref="lineChart" style="width: 800px; height: 400px; background-color: #ffffff; padding: 20px; border-radius: 20px;">
         </div> -->
+=======
+        <div class="no1" ref="lineChart" style="width: 800px; height: 400px; background-color: #ffffff; padding: 20px; border-radius: 20px;">
+        </div>
+>>>>>>> 0e9479347ad024ab7f5381dcb8ca8366da2858f8
         <div class="no2" ref="myChart" style="width: 400px; height: 400px; background-color: #ffffff; padding: 20px; border-radius: 20px;">
         </div>
         <div class="no4" ref="lineChart2" style="width: 800px; height: 400px; background-color: #ffffff; padding: 20px; border-radius: 20px;">
         </div>
+<<<<<<< HEAD
 <!--         <div class="no5" ref="lineChart3" style="width: 700px; height: 400px; background-color: #ffffff; padding: 20px; border-radius: 20px;">
         </div> -->
+=======
+        <div class="no5" ref="lineChart3" style="width: 700px; height: 400px; background-color: #ffffff; padding: 20px; border-radius: 20px;">
+        </div>
+>>>>>>> 0e9479347ad024ab7f5381dcb8ca8366da2858f8
         <div class="no3">
             <div class="app-container">
                 <el-form :model="queryParams" ref="queryRef" :inline="true" v-show="showSearch" label-width="68px">
@@ -314,8 +324,13 @@ export default {
         this.myChart = echarts.init(this.$refs.myChart)
         this.myChart.setOption({
             title: {
+<<<<<<< HEAD
                 text: '259',
                 subtext: '电路数',
+=======
+                text: '32469',
+                subtext: '设备数',
+>>>>>>> 0e9479347ad024ab7f5381dcb8ca8366da2858f8
                 left: 'center',
                 top: '43%',
                 subtextStyle: {
@@ -357,9 +372,15 @@ export default {
                         }
                     },
                     data: [
+<<<<<<< HEAD
                         { name: '健康', value: 236 },
                         { name: '一般', value: 12 },
                         { name: '不佳', value: 11 }
+=======
+                        { name: '健康', value: 1048 },
+                        { name: '一般', value: 735 },
+                        { name: '不佳', value: 180 }
+>>>>>>> 0e9479347ad024ab7f5381dcb8ca8366da2858f8
                     ]
                 }
             ]
@@ -367,7 +388,11 @@ export default {
 
 
 
+<<<<<<< HEAD
 /*         this.lineChart = echarts.init(this.$refs.lineChart)
+=======
+        this.lineChart = echarts.init(this.$refs.lineChart)
+>>>>>>> 0e9479347ad024ab7f5381dcb8ca8366da2858f8
         this.lineChart.setOption({
             title: {
                 text: '机房健康度分析'
@@ -429,7 +454,11 @@ export default {
                     data: [10, 22, 21, 14, 19, 13, 20, 11, 34, 29, 20, 10]
                 }
             ]
+<<<<<<< HEAD
         }) */
+=======
+        })
+>>>>>>> 0e9479347ad024ab7f5381dcb8ca8366da2858f8
         
         this.lineChart2 = echarts.init(this.$refs.lineChart2)
         this.line2option={
@@ -491,12 +520,21 @@ export default {
     gap: 0px 0px;
     grid-auto-flow: row;
     grid-template-areas:
+<<<<<<< HEAD
         "no4 no4 no2 no2"
         /* "no4 no4 no5 no5" */
         "no3 no3 no3 no3"
     }
 
     /* .no1 { grid-area: no1; } */
+=======
+        "no1 no1 no2 no2"
+        "no4 no4 no5 no5"
+        "no3 no3 no3 no3"
+    }
+
+    .no1 { grid-area: no1; }
+>>>>>>> 0e9479347ad024ab7f5381dcb8ca8366da2858f8
 
     .no2 { grid-area: no2; }
 

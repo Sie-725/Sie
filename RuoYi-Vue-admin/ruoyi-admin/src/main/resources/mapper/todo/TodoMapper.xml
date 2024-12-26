@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.todo.mapper.TodoMapper">
+    
+    <resultMap type="Todo" id="TodoResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="sex"    column="sex"    />
+        <result property="age"    column="age"    />
+        <result property="home"    column="home"    />
+        <result property="updateDate"    column="updateDate"    />
+    </resultMap>
+
+    <sql id="selectTodoVo">
+        select id, name, sex, age, home, updateDate from todo
+    </sql>
+
+    <select id="selectTodoList" parameterType="Todo" resultMap="TodoResult">
+        <include refid="selectTodoVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name = #{name}</if>
+            <if test="sex != null  and sex != ''"> and sex = #{sex}</if>
+            <if test="age != null  and age != ''"> and age = #{age}</if>
+            <if test="home != null  and home != ''"> and home like concat('%', #{home}, '%')</if>
+            <if test="updateDate != null  and updateDate != ''"> and updateDate like concat('%', #{updateDate}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectTodoById" parameterType="Long" resultMap="TodoResult">
+        <include refid="selectTodoVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertTodo" parameterType="Todo" useGeneratedKeys="true" keyProperty="id">
+        insert into todo
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">name,</if>
+            <if test="sex != null and sex != ''">sex,</if>
+            <if test="age != null and age != ''">age,</if>
+            <if test="home != null and home != ''">home,</if>
+            <if test="updateDate != null and updateDate != ''">updateDate,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="sex != null and sex != ''">#{sex},</if>
+            <if test="age != null and age != ''">#{age},</if>
+            <if test="home != null and home != ''">#{home},</if>
+            <if test="updateDate != null and updateDate != ''">#{updateDate},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTodo" parameterType="Todo">
+        update todo
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="sex != null and sex != ''">sex = #{sex},</if>
+            <if test="age != null and age != ''">age = #{age},</if>
+            <if test="home != null and home != ''">home = #{home},</if>
+            <if test="updateDate != null and updateDate != ''">updateDate = #{updateDate},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTodoById" parameterType="Long">
+        delete from todo where id = #{id}
+    </delete>
+
+    <delete id="deleteTodoByIds" parameterType="String">
+        delete from todo where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

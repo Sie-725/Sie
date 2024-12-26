@@ -31,8 +31,13 @@ export default defineConfig(({ mode, command }) => {
       proxy: {
         // https://cn.vitejs.dev/config/#server-proxy
         '/dev-api': {
+<<<<<<< HEAD
           target: 'http://82.157.20.139:19393',// 此端口号必须与application.yml中的一致
           //target: 'http://localhost:19393',
+=======
+        target: 'http://82.157.20.139:19393',// 此端口号必须与application.yml中的一致
+          //target: 'http://localhost:19393',// 此端口号必须与application.yml中的一致
+>>>>>>> 0e9479347ad024ab7f5381dcb8ca8366da2858f8
           // target: 'https://api.wzs.pub/mock/13',
           changeOrigin: true,
           rewrite: (p) => p.replace(/^\/dev-api/, '')
